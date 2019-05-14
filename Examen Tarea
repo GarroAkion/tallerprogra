@@ -3,8 +3,7 @@
 class Tarea(object):
     def __init__(self):
         pass
-
-    #Suma de la primera y ultima fila
+        
     def Suma_fila(self,matriz):
         if isinstance (matriz,list):
             return self.PyU_aux(matriz,0,0,0)
@@ -87,20 +86,6 @@ class Tarea(object):
             return self.factorizar(r,s,num1+1,num2+1)
         else:
             return self.factorizar(r,s,num1,num2+1)
-
-    
-        
-
-
-
-
-        
-    
-    
-        
-
-
-
         
 t=Tarea()
 matriz=[[8, 12, 16,5], [20, 24, 28,5], [32, 36, 40,4],[1,2,2,3]]
