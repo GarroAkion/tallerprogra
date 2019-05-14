@@ -1,0 +1,114 @@
+#Tarea
+
+class Tarea(object):
+    def __init__(self):
+        pass
+
+    #Suma de la primera y ultima fila
+    def Suma_fila(self,matriz):
+        if isinstance (matriz,list):
+            return self.PyU_aux(matriz,0,0,0)
+        else:
+            return "No es una matriz"
+    def PyU_aux(self,matriz,indiceF,indiceC,resultado):
+        if indiceF==len(matriz)-1 and indiceC==len(matriz):
+            return resultado
+        elif indiceC==len(matriz):
+            return self.PyU_aux(matriz,indiceF+1,0,resultado)
+        elif indiceF==0:
+            return self.PyU_aux(matriz,indiceF,indiceC+1,resultado+(matriz[indiceF][indiceC]))
+        elif indiceF==len(matriz)-1:
+            return self.PyU_aux(matriz,indiceF,indiceC+1,resultado+(matriz[indiceF][indiceC]))
+        else:
+            return self.PyU_aux(matriz,indiceF+1,indiceC,resultado)
+
+
+    def Suma_columna(self,matriz):
+        if isinstance (matriz,list):
+            return self.columna_aux(matriz,0,0,0)
+        else:
+            return "No es una matriz"
+        
+    def columna_aux(self,matriz,indiceF,indiceC,resultado):
+        if indiceF==len(matriz) and indiceC==len(matriz)-1:
+            return resultado
+        elif indiceF==len(matriz):
+            return self.columna_aux(matriz,0,indiceC+1,resultado)
+        elif indiceC==0:
+            return self.columna_aux(matriz,indiceF+1,indiceC,resultado+(matriz[indiceF][indiceC]))
+        elif indiceC==len(matriz)-1:
+            return self.columna_aux(matriz,indiceF+1,indiceC,resultado+(matriz[indiceF][indiceC]))
+        else:
+            return self.columna_aux(matriz,indiceF,indiceC+1,resultado)
+
+    def suma_antidiagonal(self, matriz):
+        if isinstance(matriz, list):
+            return self.suma_antidiagonal_aux(matriz, 0, len(matriz)-1,0)
+        else: return'error'
+
+    def suma_antidiagonal_aux(self, matriz, indiceF,indiceC, resultado):
+        if indiceF==len (matriz):
+            return resultado
+        else: return self.suma_antidiagonal_aux(matriz, indiceF+1,indiceC-1, resultado+(matriz[indiceF][indiceC]))
+
+    def promedio_diagonal(self,matriz):
+        if isinstance(matriz,list):
+            return self.prom_aux(matriz,0,0)//len(matriz)
+        else:
+            return "Error"
+    def prom_aux(self,matriz,indice,resultado):
+        if indice==len(matriz):
+            return resultado
+        else:
+            return self.prom_aux(matriz,indice+1,resultado+matriz[indice][indice])
+        
+    def mediana(self,matriz):
+        if isinstance (matriz,list):
+            par = lambda digito:digito%2==0
+            return self.med_aux(matriz,par)
+        else:
+            return "Error no es una matriz"
+        
+    def med_aux(self,matriz,condicion):
+        if condicion(len(matriz)):
+            return ((matriz[(len(matriz)//2)-1][len(matriz)-1]+matriz[len(matriz)//2][0])/2)
+        else:
+            return (matriz[len(matriz)//2][len(matriz)//2])
+        
+    def polinomio(self,r,s):
+        if isinstance (r,int) and (s,int):
+            return self.factorizar(r,s,0,1)
+        else:
+            return "Error no son enteros"
+    def factorizar(self,r,s,num1,num2):
+        if num1+num2==r and num1*num2==s:
+            return (num1,num2)
+        elif s%num2==0:
+            return self.factorizar(r,s,num1+1,num2+1)
+        else:
+            return self.factorizar(r,s,num1,num2+1)
+
+    
+        
+
+
+
+
+        
+    
+    
+        
+
+
+
+        
+t=Tarea()
+matriz=[[8, 12, 16,5], [20, 24, 28,5], [32, 36, 40,4],[1,2,2,3]]
+r=9
+s=18
+print("Sumas :")
+print(( t.Suma_fila(matriz),t.Suma_columna(matriz),t.suma_antidiagonal(matriz),t.Suma_fila(matriz)+t.Suma_columna(matriz)+t.suma_antidiagonal(matriz)))
+print("Estadisticas :")
+print((t.promedio_diagonal(matriz),t.mediana(matriz)))
+print("Factorizacion de 9 y 18:")
+print(t.polinomio(r,s))
